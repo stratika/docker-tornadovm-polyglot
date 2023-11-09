@@ -13,7 +13,7 @@ elif [[ "$1" == "--help" ]] || [[ "$1" == "--h" ]]; then
     echo "  ./buildDockerAndLaunch.sh --buildAndLaunch	to build and launch the image, or"
     echo "  ./buildDockerAndLaunch.sh <command>		to launch a built image, or"
     echo "  ./buildDockerAndLaunch.sh --deleteVolume	to delete the generated volume"
-    echo "  ./buildDockerAndLaunch.sh --help		to delete the generated volume"
+    echo "  ./buildDockerAndLaunch.sh --help		to print help message"
 else
     docker run -it -p 8080:8080 --rm --runtime=nvidia --gpus all -v data:/data tornadovm-polyglot-graal-23.1.0-nvidia-opencl-container "$@"
 fi
