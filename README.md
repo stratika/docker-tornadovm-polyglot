@@ -1,25 +1,28 @@
-# docker-tornadovm-graalpython
-Docker build scripts for TornadoVM with GraalPy on GPUs.
-The size of the image is 11.2GB and it has a build image of [TornadoVM (GraalVM 23.1.0)](https://github.com/beehive-lab/TornadoVM/commit/fe269d9b16d9b0b1ac981c80dfec2a5cf7c14206) with GraalPython ([tag: graal-23.1.0](https://github.com/oracle/graalpython/releases/tag/graal-23.1.0)) and OpenCL driver for Nvidia GPUs.
+# docker-tornadovm-polyglot
+Docker build scripts for running Polyglot GraalVM implementations (e.g., GraalPython, GraalJS) with TornadoVM on GPUs.
+The docker images use [TornadoVM (GraalVM 23.1.0)](https://github.com/beehive-lab/TornadoVM/commit/fe269d9b16d9b0b1ac981c80dfec2a5cf7c14206) along with GraalPython ([tag: graal-23.1.0](https://github.com/oracle/graalpython/releases/tag/graal-23.1.0)) and GraalJS ([tag: graal-23.1.0](https://github.com/oracle/graaljs/releases/tag/graal-23.1.0)). The images contain the installation of [OpenCL driver for Nvidia GPUs]().
 
+## Build docker images
 To build the container you can use a script as follows:
 ```bash
-./buildDockerAndLaunch.sh --help
+./buildDocker.sh --help
 Please run:
-  ./buildDockerAndLaunch.sh --build	          #to build the image, or
-  ./buildDockerAndLaunch.sh <command>		      #to launch the built image or execute a command, or
-  ./buildDockerAndLaunch.sh --deleteVolume	  #to delete the generated volume, or
-  ./buildDockerAndLaunch.sh --help		        #to print help message
+  ./buildDocker.sh --python           to create a volume and build the docker image for tornadovm-graalpy, or
+  ./buildDocker.sh --js               to create a volume and build the docker image for tornadovm-graaljs, or
+  ./buildDocker.sh --all              to create a volume and build all docker images, or
+  ./buildDocker.sh --deleteVolume     to delete the generated volume, or
+  ./buildDocker.sh --help             to print help message
 ```
 
-To build the container, try:
+To build all images, try:
 ```bash
-./buildDockerAndLaunch.sh --build
+./buildDocker.sh --all
 ```
 
-To try an example of running a python example from [here](https://github.com/beehive-lab/TornadoVM/blob/master/tornado-assembly/src/examples/polyglotTruffle/mxmWithTornadoVM.py) in the container with TornadoVM use:
+## Run examples
+To run an example of a Python program from [here](https://github.com/beehive-lab/TornadoVM/blob/master/tornado-assembly/src/examples/polyglotTruffle/mxmWithTornadoVM.py) in the container with TornadoVM use:
 ```bash
-./buildDockerAndLaunch.sh tornado --printKernel --truffle python /tornado-dev/tornado/bin/sdk/examples/polyglotTruffle/mxmWithTornadoVM.py
+./polyglot-graalpy/tornadovm-polyglot.sh tornado --printKernel --truffle python /tornado-dev/tornado/bin/sdk/examples/polyglotTruffle/mxmWithTornadoVM.py
 ```
 The output will be:
 ```bash
