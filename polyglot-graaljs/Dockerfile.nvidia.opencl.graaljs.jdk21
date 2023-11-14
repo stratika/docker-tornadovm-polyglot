@@ -22,7 +22,7 @@ RUN mkdir -p /etc/OpenCL/vendors && \
 ENV NVIDIA_VISIBLE_DEVICES all
 ENV NVIDIA_DRIVER_CAPABILITIES compute,utility
 
-# Install GraalPy
+# Install GraalJS
 WORKDIR /graaljs-dev/
 RUN git clone https://github.com/oracle/graal /graaljs-dev/graal && cd /graaljs-dev/graal && git checkout f795ef233f3e325aab46db7241f367b6c88de1b0
 RUN git clone https://github.com/oracle/graaljs.git /graaljs-dev/graaljs && cd /graaljs-dev/graaljs && git checkout graal-23.1.0
